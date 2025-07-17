@@ -223,8 +223,12 @@ jobs:
       - name: setup node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
-
+          node-version: 20
+      - name: set github environment variables
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+          VARS_CONTEXT: ${{ toJson(vars) }}
+        run: scripts/github-set-env.sh
       - name: install twilio cli
         run: npm install --ignore-scripts
 
